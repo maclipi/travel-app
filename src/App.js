@@ -10,7 +10,7 @@ function App() {
     <div className="App">
     <Router>
     <Route exact path="/" component={AppLayout} />
-    <Route path="/about" component={StoryEditor} />
+    <Route path="/editor" component={StoryEditor} />
     </Router>
     </div>
   );
