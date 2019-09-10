@@ -1,32 +1,69 @@
 /* eslint-disable no-unused-expressions */
-import React,{ useState} from 'react';
+import React,{ useState,useEffect} from 'react';
+import ReactTooltip from 'react-tooltip'
+import axios from 'axios';
 import '../App.css';
-import { Container, Row, Col,Card, Button, Modal } from 'react-bootstrap';
+import { Container, Row, Col,Card, Button, Modal,Tooltip } from 'react-bootstrap';
 
 import data from "./data";
-const AppLayout = () => {
+
+
+const AppLayout =  () => {
     const [count, setCount] = useState(false);
-    const openModal=()=>{
+    const [getContent, setContent] = useState([]);
+    const [request,setRequest] = useState('');
+  
+    
+    let req = false;
+    const openModal=(e)=>{
+      console.log(e);
+      setRequest(e);
         setCount(true);
-        console.log('Fun');
         
+        // dangerouslySetInnerHTML
     }
     const handleClose=()=>{
-        console.log('gee');
+      
         setCount(false);
     }
-   let gdata =  data.map((data,i)=>{
+    const getData=async ()=>{
+       await axios.get(`http://3.17.26.22:3002/getPost`)
+      .then(res => {
+        const posts = res.data;
+      
+        setContent( posts );
+        return posts;
+      })
+      return 'posts';
+    }
+    
+    
+
+    useEffect( () => {
+      getData(e=>{
+      console.log(e);
+     });
+     console.log(getContent);
+      
+    },[])
+
+
+   let gdata =  getContent.map((data,i)=>{
+   
         return  <Col xs={4}  className={i > 2 ? 'autoHeight': ''}>
       <div className="col-xs-12" >
+      <ReactTooltip />
           <Card  style={{ width: '18rem', height: '0.1rem' }}>
-              <Card.Img   variant="top" style={{ width: '18rem', height: '10rem' }} src="https://images.pexels.com/photos/2873510/pexels-photo-2873510.jpeg" />
+              <Card.Img   variant="top" style={{ width: '18rem', height: '10rem' }} src={ data.imageurl || "https://www.fillmurray.com/640/360"} />
               <Card.Body className="cardStyle">
-                  <Card.Title>Card Title</Card.Title>
+                  <Card.Title data-tip={data.title} className="title-text">{data.title|| 'No Title Found'}
+                   
+                  </Card.Title>
+                  
                   <Card.Text>
-                      Some quick example text to build on the card title and make up the bulk of
-                      the card's content.
+                      {data.glimpse || "No content found for this" }
 </Card.Text>
-                  <Button variant="primary" onClick={openModal}>Go somewhere</Button>
+                  <Button variant="primary" onClick={()=> openModal(data.content)}>Go somewhere</Button>
               </Card.Body>
           </Card>
           </div>
@@ -39,7 +76,7 @@ const AppLayout = () => {
          <>  <Container className="container" >
             
             {finalData.map((e,id)=>{
-                console.log(e);
+              
                return <Row  key ={id} className="getDiffrence">{e}</Row>
             })}
                 
@@ -51,25 +88,14 @@ const AppLayout = () => {
           <Modal.Header closeButton>
             <Modal.Title id="example-custom-modal-styling-title">Modal heading</Modal.Title>
           </Modal.Header>
-          <Modal.Body>Woohoo, you're reading this text in a modal!
-          Woohoo, you're reading this text in a modal!
-          Woohoo, you're reading this text in a modal!
-          Woohoo, you're reading this text in a modal!
-          Woohoo, you're reading this text in a modal!
-          Woohoo, you're reading this text in a modal!
-          Woohoo, you're reading this text in a modal!
-          Woohoo, you're reading this text in a modal!
-          Woohoo, you're reading this text in a modal!
-          Woohoo, you're reading this text in a modal!
-          Woohoo, you're reading this text in a modal!
-          Woohoo, you're reading this text in a modal!
+          <Modal.Body> <div contentEditable='true' dangerouslySetInnerHTML={{ __html: request}}></div> 
           <br />
-          <div className="imageClass">
+          {/* <div className="imageClass">
           <figure>
           <img   title="Title Tag Goes Here" src="http://stage-bcdn.newshunt.com/cmd/resize/740x320__DHQ_/dhc/images/creator/61/09/81/61098140ce4c11e9a5bf8f0e8678142f.jpg" alt="ImageIsHere"  />
           <figcaption>Fig.1 - Trulli, Puglia, Italy.</figcaption>
           </figure>
-          </div>
+          </div> */}
           </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={handleClose}>
