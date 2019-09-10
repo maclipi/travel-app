@@ -3,40 +3,17 @@
 .App {
   text-align: center;
   font-family: 'Raleway', sans-serif;
+  width: 100%;
+  position: fixed;
+  color:white;
+  background-color: #282c34;
 }
 .body{
   font-family: 'Raleway', sans-serif;
+
+  
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
 .cardStyle {
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.6);
   transition: 0.3s;
@@ -50,6 +27,8 @@
 
 .container {
   padding-top: 20px;
+  overflow:auto !important;
+  margin-bottom:100px; 
 }
 
 .autoHeight {
@@ -76,7 +55,10 @@ text-overflow: ellipsis;
  }
 
  .__react_component_tooltip {
-   font-size:20px;
+   font-size:15px;
+   font-weight: 800;
+   max-width:300px;
+    word-wrap:break-word;
  }
 
 

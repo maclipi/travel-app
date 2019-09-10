@@ -65,7 +65,7 @@ const AppLayout =  () => {
                   <Card.Text data-tip={data.glimpse} className="title-text">
                       {data.glimpse || "No content found for this" }
 </Card.Text>
-                  <Button variant="primary" onClick={()=> openModal(data.content,data.title)}>Go somewhere</Button>
+                  <Button variant="primary" onClick={()=> openModal(data.content,data.title)}>!! Read in Depth !!</Button>
               </Card.Body>
           </Card>
           </div>
@@ -90,7 +90,7 @@ const AppLayout =  () => {
           <Modal.Header closeButton>
             <Modal.Title id="example-custom-modal-styling-title" alt={title}>{title || 'No Heading'}</Modal.Title>
           </Modal.Header>
-          <Modal.Body> <div contentEditable='true' dangerouslySetInnerHTML={{ __html: request}}></div> 
+          <Modal.Body> <div contentEditable='false' dangerouslySetInnerHTML={{ __html: request}}></div> 
           <br />
           {/* <div className="imageClass">
           <figure>
@@ -102,9 +102,6 @@ const AppLayout =  () => {
           <Modal.Footer>
             <Button variant="secondary" onClick={handleClose}>
               Close
-            </Button>
-            <Button variant="primary" onClick={handleClose}>
-              Save Changes
             </Button>
           </Modal.Footer>
          </Modal>
