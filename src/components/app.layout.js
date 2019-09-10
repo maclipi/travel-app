@@ -3,7 +3,7 @@ import React,{ useState,useEffect} from 'react';
 import ReactTooltip from 'react-tooltip'
 import axios from 'axios';
 import '../App.css';
-import { Container, Row, Col,Card, Button, Modal,Tooltip } from 'react-bootstrap';
+import { Container, Row, Col,Card, Button, Modal } from 'react-bootstrap';
 
 import data from "./data";
 
@@ -11,13 +11,15 @@ import data from "./data";
 const AppLayout =  () => {
     const [count, setCount] = useState(false);
     const [getContent, setContent] = useState([]);
+    const [title,setTitle] = useState('');
     const [request,setRequest] = useState('');
   
     
     let req = false;
-    const openModal=(e)=>{
+    const openModal=(e,title)=>{
       console.log(e);
       setRequest(e);
+      setTitle(title);
         setCount(true);
         
         // dangerouslySetInnerHTML
@@ -54,16 +56,16 @@ const AppLayout =  () => {
       <div className="col-xs-12" >
       <ReactTooltip />
           <Card  style={{ width: '18rem', height: '0.1rem' }}>
-              <Card.Img   variant="top" style={{ width: '18rem', height: '10rem' }} src={ data.imageurl || "https://www.fillmurray.com/640/360"} />
+              <Card.Img   variant="top" style={{ width: '18rem', height: '10rem' }} src={ data.image || "https://www.fillmurray.com/640/360"} />
               <Card.Body className="cardStyle">
                   <Card.Title data-tip={data.title} className="title-text">{data.title|| 'No Title Found'}
                    
                   </Card.Title>
                   
-                  <Card.Text>
+                  <Card.Text data-tip={data.glimpse} className="title-text">
                       {data.glimpse || "No content found for this" }
 </Card.Text>
-                  <Button variant="primary" onClick={()=> openModal(data.content)}>Go somewhere</Button>
+                  <Button variant="primary" onClick={()=> openModal(data.content,data.title)}>Go somewhere</Button>
               </Card.Body>
           </Card>
           </div>
@@ -86,7 +88,7 @@ const AppLayout =  () => {
       aria-labelledby="contained-modal-title-vcenter"
       centered show={count} onHide={handleClose}>
           <Modal.Header closeButton>
-            <Modal.Title id="example-custom-modal-styling-title">Modal heading</Modal.Title>
+            <Modal.Title id="example-custom-modal-styling-title" alt={title}>{title || 'No Heading'}</Modal.Title>
           </Modal.Header>
           <Modal.Body> <div contentEditable='true' dangerouslySetInnerHTML={{ __html: request}}></div> 
           <br />

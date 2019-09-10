@@ -37,15 +37,19 @@ const StoryEditor = ()=>{
         const data = {
             title : title,
             textData:text,
-            imageurl:image,
+            image:image,
             glimpse:glimpse
         }
         axios.post('http://3.17.26.22:3002/insert', {
             title: title.toString(),
-            content: text.toString()
+            content: text.toString(),
+            image:image.toString(),
+            glimpse:glimpse.toString()
           })
           .then(function (response) {
             console.log(response);
+            alert('Data saved !!');
+            window.location.reload();
           })
           .catch(function (error) {
             console.log(error);

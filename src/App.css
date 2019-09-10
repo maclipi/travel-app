@@ -66,9 +66,17 @@ white-space: nowrap;
 overflow: hidden;
 text-overflow: ellipsis;
  }
+ .glimpse-text{
+  /* max-width: 102ch !important; */
+  max-height: 1140ch !important;
+  /* white-space: nowrap; */
+  font-size: 12px;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+ }
 
  .__react_component_tooltip {
-   font-size:25px;
+   font-size:20px;
  }
 
 
