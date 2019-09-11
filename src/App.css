@@ -78,6 +78,8 @@ text-overflow: ellipsis;
 
  .setAlignment {
   margin-left: 5%;
+  margin-left: -8px !important;
+  margin-right: -8px !important;
 }
 .ant-row{
   margin-left: -55px !important;
