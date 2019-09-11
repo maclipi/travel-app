@@ -79,3 +79,7 @@ text-overflow: ellipsis;
  .setAlignment {
   margin-left: 5%;
 }
+.ant-row{
+  margin-left: -55px !important;
+    margin-right: 37px !important;
+}

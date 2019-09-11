@@ -76,7 +76,7 @@ console.log('getClose')
             actions={[
               <Icon type="like" theme="filled" title="1" key="heart" ></Icon>,
               <Icon type="dislike"  key="edit" />,
-              <p type="ellipsis"  data-tip={item.glimpse} key="ellipsis" onClick={()=> openModal(item.content,item.title)} >Read More</p>,
+              <p type="ellipsis"  data-tip={item.glimpse} key="ellipsis" onClick={()=> openModal(item.content,item.title)} >{item.title}</p>,
             ]}
           >
           <Tooltip placement="top" title={ item.title}>
